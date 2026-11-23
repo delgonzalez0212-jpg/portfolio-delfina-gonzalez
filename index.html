@@ -220,7 +220,7 @@ header{background:rgba(239,237,232,.82);backdrop-filter:blur(12px);-webkit-backd
 <section class="view" id="proyecto"></section>
 
 <section class="view" id="perfil"><div class="wrap in">
- <div class="pic st"><div class="f"><img src="img/me_00.jpg" alt="Delfina Rosario González"></div><div class="mono mut" style="margin-top:12px">D. R. González — Arquitecta</div></div>
+ <div class="pic st"><div class="f"><img src="3_imagenes/img/me_00.jpg" alt="Delfina Rosario González"></div><div class="mono mut" style="margin-top:12px">D. R. González — Arquitecta</div></div>
  <div>
   <div class="mono mut st">Perfil · Arquitecta — Campo Menor en Diseño</div>
   <h2 class="st d1">Me interesa una arquitectura que surge de la lectura atenta del contexto, donde el dibujo, la materialidad y la estructura se integran como herramientas de pensamiento proyectual.</h2>
@@ -303,7 +303,8 @@ brunetta:{tags:['2025','Patrimonio','Oficinas'],prog:'Oficinas',quote:'Se entien
 paisaje:{tags:['Urbano'],prog:'Paisaje',quote:'Etapa inicial, rehabilitación, convivencia y reutilización.'}};
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const PNG=k=>k.startsWith('br_')&&!['br_ext','br_int','br_gal','br_maq'].includes(k);
-const IMG=k=>'img/'+k+(PNG(k)?'.png':'.jpg');
+const LOC={"br_gal.jpg": 2, "br_p2.png": 2, "br_s1.png": 2, "e3_02.jpg": 2, "mov_02.jpg": 2, "mov_sub.jpg": 2, "pam_06.jpg": 2, "pam_det.jpg": 2, "pam_pl.jpg": 2, "pp_00.jpg": 2, "pp_01.jpg": 2, "pp_02.jpg": 2, "pp_p2.jpg": 2, "br_ext.jpg": 3, "br_int.jpg": 3, "br_maq.jpg": 3, "br_mat.png": 3, "bw_1.jpg": 3, "me_00.jpg": 3, "mov_00.jpg": 3, "mov_pl6.jpg": 3, "pam_axo_terraza.jpg": 3, "pam_ct.jpg": 3, "pam_plt.jpg": 3, "pam_pp2.jpg": 3, "pp_c2.jpg": 3, "pp_det.jpg": 3, "pp_p1.jpg": 3, "br_est.png": 4, "br_p4.png": 4, "br_p5.png": 4, "bw_3.jpg": 4, "e3_00.jpg": 4, "mov_01.jpg": 4, "mov_impl.jpg": 4, "pam_axo.jpg": 4, "pam_cl.jpg": 4, "pam_cl2.jpg": 4, "pam_pb.jpg": 4, "pp_03.jpg": 4, "pp_p4.jpg": 4, "aer.jpg": 5, "br_p1.png": 5, "bw_2.jpg": 5, "bw_4.jpg": 5, "e3_19.jpg": 5, "mov_ct.jpg": 5, "mov_daxo.jpg": 5, "mov_dsec.jpg": 5, "mov_pl4.jpg": 5, "mov_pl5.jpg": 5, "mov_plt.jpg": 5, "mov_sk.jpg": 5, "pam_pp1.jpg": 5, "pp_c1.jpg": 5, "pp_p3.jpg": 5};
+const IMG=k=>{const f=k+(PNG(k)?'.png':'.jpg');return LOC[f]?LOC[f]+'_imagenes/img/'+f:'img/'+f};
 P.forEach(p=>{Object.assign(p,X[p.id]);p.items=[];p.sl.forEach(s=>s.im.forEach(m=>p.items.push({k:m[0],c:m[1]||s.k,ph:!!s.ph,w:s.g==='g1'||s.g==='gs3'})))});
 $('#nlam').textContent=String(P.reduce((a,p)=>a+p.items.length,0)).padStart(2,'0');
 /* router */
