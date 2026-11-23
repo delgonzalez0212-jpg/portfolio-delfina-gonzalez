@@ -192,6 +192,14 @@ header{background:rgba(239,237,232,.82);backdrop-filter:blur(12px);-webkit-backd
  #lb .stage{inset:56px 10px 70px}#lb .nv{display:none}
 }
 </style>
+<script>
+/* respaldo: si una imagen no carga, probar otras carpetas */
+document.addEventListener('error',function(e){var im=e.target;if(!im||im.tagName!=='IMG')return;
+ var f=(im.getAttribute('src')||'').split('/').pop();if(!f)return;
+ var c=['img/'+f,'2_imagenes/img/'+f,'3_imagenes/img/'+f,'4_imagenes/img/'+f,'5_imagenes/img/'+f,'portfolio-web/img/'+f];
+ var t=+(im.dataset.t||0);while(t<c.length&&im.getAttribute('src')===c[t])t++;
+ if(t<c.length){im.dataset.t=t+1;im.src=c[t]}},true);
+</script>
 </head>
 <body>
 <div id="bar"></div>
@@ -377,8 +385,8 @@ addEventListener('keydown',e=>{if(!lb.classList.contains('on'))return;if(e.key==
 /* copy */
 $$('[data-copy]').forEach(b=>b.onclick=async()=>{try{await navigator.clipboard.writeText(b.dataset.copy);const t=$('#toast');t.classList.add('on');setTimeout(()=>t.classList.remove('on'),1500)}catch(e){}});
 /* init */
-const h0=(location.hash||'#inicio').slice(1),pi0=P.findIndex(p=>p.id===h0);
-if(pi0>=0)openP(pi0);else show(['inicio','proyectos','perfil','contacto'].includes(h0)?h0:'inicio');
+try{history.replaceState(null,'',location.pathname)}catch(e){}
+show('inicio');
 </script>
 </body>
 </html>
