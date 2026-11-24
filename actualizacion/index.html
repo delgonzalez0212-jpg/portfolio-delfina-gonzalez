@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Delfina Rosario González — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1d1d1b;--mut:#8a8780;--bg:#efede8;--line:#d9d6cf;--dk:#151515;--e:cubic-bezier(.65,0,.2,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:'Inter Tight',sans-serif;font-weight:300;-webkit-font-smoothing:antialiased;overflow:hidden}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+a{color:inherit;text-decoration:none}
+.sf{font-family:'Instrument Serif',serif;font-weight:400;letter-spacing:-.01em}
+.it{font-style:italic}
+.mono{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase}
+.mut{color:var(--mut)}
+/* header */
+header{position:fixed;top:0;left:0;right:0;height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 4vw;z-index:40;transition:color .5s}
+header .nm{font-size:14px}header .nm b{font-weight:500}header .nm span{color:var(--mut)}
+header nav{display:flex;gap:28px;font-size:13px}
+header nav button{position:relative;padding:4px 0;opacity:.6;transition:opacity .3s}
+header nav button:hover,header nav button.on{opacity:1}
+header nav button::after{content:'';position:absolute;left:0;right:0;bottom:-2px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .5s var(--e)}
+header nav button.on::after{transform:scaleX(1);transform-origin:left}
+header{background:rgba(239,237,232,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}body.dark header{color:#f1efe9;background:rgba(21,21,21,.82)}body.dark header .nm span{color:#8f8c86}
+#bar{position:fixed;top:0;left:0;height:2px;width:0;background:#b5472e;z-index:45}
+/* views */
+.view{position:fixed;inset:0;overflow-y:auto;overflow-x:hidden;opacity:0;visibility:hidden;transition:opacity .55s,visibility 0s .55s}
+.view.on{opacity:1;visibility:visible;transition:opacity .7s .1s}
+.view .in{transform:translateY(30px);transition:transform 1s var(--e)}
+.view.on .in{transform:none}
+.st{opacity:0;transform:translateY(24px);transition:opacity .9s,transform 1s var(--e)}
+.view.on .st{opacity:1;transform:none}
+.view.on .st.d1{transition-delay:.1s}.view.on .st.d2{transition-delay:.2s}.view.on .st.d3{transition-delay:.3s}.view.on .st.d4{transition-delay:.4s}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:12px 20px;border-radius:30px;background:var(--ink);color:#fff;font-size:13px;transition:gap .4s var(--e),background .3s}
+.btn:hover{gap:18px;background:#b5472e}
+.btn.ol{background:none;color:inherit;border:1px solid currentColor}
+/* HOME */
+#inicio .wrap{min-height:100%;display:grid;grid-template-columns:4.2fr 5.8fr;gap:4vw;padding:12vh 4vw 6vh;align-items:center}
+#inicio h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(60px,8.4vw,138px);line-height:.86;letter-spacing:-.025em}
+#inicio h1 em{color:var(--mut)}
+#inicio .bio{margin:3.2vh 0;max-width:420px;font-size:14px;line-height:1.6;color:#55534e}
+.stats{display:flex;gap:42px;padding:2vh 0 3.4vh;border-top:1px solid var(--line);margin-top:1vh}
+.stats div span{display:block;margin-bottom:6px}
+.stats b{font-family:'Instrument Serif',serif;font-weight:400;font-size:44px;line-height:1}
+.show{position:relative}
+.show .fr{position:relative;aspect-ratio:4/3;overflow:hidden;border-radius:3px;cursor:pointer;background:#ddd}
+.show .fr img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.08);transition:opacity 1.2s,transform 7s linear}
+.show .fr img.c{object-fit:contain;background:#fff}
+.show .fr img.on{opacity:1;transform:scale(1)}
+.show .cap{display:flex;align-items:center;justify-content:space-between;margin-top:14px}
+.show .cap .t{display:flex;align-items:baseline;gap:12px;min-height:26px}
+.show .cap .t b{font-family:'Instrument Serif',serif;font-weight:400;font-size:22px}
+.show .cap .t>*{transition:opacity .5s,transform .6s var(--e)}
+.show .cap.sw .t>*{opacity:0;transform:translateY(8px)}
+.show .ar{display:flex;gap:8px}
+.ar button{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);transition:background .3s,color .3s}
+.ar button:hover{background:var(--ink);color:#fff}
+.prog{display:flex;gap:6px;margin-top:14px}
+.prog i{flex:1;height:2px;background:var(--line);position:relative;overflow:hidden;cursor:pointer}
+.prog i b{position:absolute;inset:0;background:var(--ink);transform:scaleX(0);transform-origin:left}
+.prog i.done b{transform:scaleX(1)}
+.prog i.run b{animation:run 5s linear forwards}
+@keyframes run{to{transform:scaleX(1)}}
+/* PROYECTOS */
+#proyectos .wrap{padding:13vh 4vw 10vh}
+.ph{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:18px}
+.ph h2{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(44px,5vw,78px);line-height:.9}
+.ph h2 sup{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--mut);vertical-align:top;margin-right:10px}
+.bar2{display:flex;justify-content:space-between;align-items:center;margin:20px 0 34px;gap:20px;flex-wrap:wrap}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chips button{padding:7px 14px;border-radius:20px;border:1px solid var(--line);font-size:12px;transition:all .3s}
+.chips button.on,.chips button:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.tog{display:flex;border:1px solid var(--line);border-radius:20px;padding:3px}
+.tog button{padding:5px 12px;border-radius:16px;font-size:12px}
+.tog button.on{background:var(--ink);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3.2vw 2vw}
+.it-c{cursor:pointer;transition:opacity .5s,transform .6s var(--e)}
+.it-c.hide{display:none}
+.it-c .im{aspect-ratio:4/3;overflow:hidden;border-radius:3px;background:#ddd;position:relative}
+.it-c .im img{width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--e)}
+.it-c .im img.c{object-fit:contain;background:#fff}
+.it-c .im img.h2{position:absolute;inset:0;opacity:0;transition:opacity .6s,transform 1.4s var(--e);object-fit:contain;background:#fff}
+.it-c:hover .im img{transform:scale(1.05)}
+.it-c:hover .im img.h2{opacity:1}
+.it-c .mt{display:flex;justify-content:space-between;margin-top:14px}
+.it-c h3{font-family:'Instrument Serif',serif;font-weight:400;font-size:26px;margin-top:4px;line-height:1.1}
+.it-c .sb{font-size:13px;color:var(--mut);font-style:italic;font-family:'Instrument Serif',serif;font-size:16px}
+.grid.list{grid-template-columns:1fr;gap:0}
+.grid.list .it-c{display:grid;grid-template-columns:70px 1.4fr 1fr 220px;align-items:center;padding:20px 0;border-bottom:1px solid var(--line)}
+.grid.list .it-c.hide{display:none}
+.grid.list .it-c .im{order:4;aspect-ratio:16/9}
+.grid.list .it-c .mt{display:contents}
+.grid.list .it-c .n{order:1}.grid.list .it-c .tx{order:2}.grid.list .it-c .y{order:3}
+.grid.list .it-c h3{font-size:34px}
+.empty{display:none;padding:40px 0}
+/* PROJECT */
+#proyecto{background:var(--dk);color:#f1efe9}
+#proyecto .hd{padding:15vh 4vw 4vh}
+#proyecto .kk{color:#8f8c86;margin-bottom:22px}
+#proyecto h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(56px,7.6vw,128px);line-height:.88;letter-spacing:-.02em}
+#proyecto h1+.sb{font-family:'Instrument Serif',serif;font-style:italic;font-size:clamp(24px,2.6vw,42px);color:#a9a59d;margin-top:10px}
+.hero{margin:0 4vw;height:76vh;overflow:hidden;border-radius:3px;position:relative;cursor:zoom-in}
+.hero img{width:100%;height:120%;object-fit:cover;will-change:transform}
+.hero img.c{object-fit:contain;background:#fff;height:100%}
+.ptx{display:grid;grid-template-columns:2.2fr 7.8fr;gap:4vw;padding:12vh 4vw 6vh}
+.pm div{padding:12px 0;border-top:1px solid #2e2e2c;font-size:13px;line-height:1.45}
+.pm div span{display:block;color:#8f8c86;margin-bottom:5px}
+.pcols{columns:2;column-gap:3.4vw;font-size:14.5px;line-height:1.72;color:#cfccc5}
+.pcols p{margin-bottom:1.1em;break-inside:avoid-column}
+.pcols p:first-child::first-line{color:#f1efe9}
+.qt{display:grid;grid-template-columns:2.2fr 5fr 2.8fr;gap:4vw;padding:6vh 4vw 12vh;align-items:center}
+.qt blockquote{font-family:'Instrument Serif',serif;font-size:clamp(28px,3.2vw,52px);line-height:1.1}
+.qt blockquote::before{content:'—';margin-right:12px;color:#8f8c86}
+.qt .esq{cursor:zoom-in}
+.qt .esq img{border-radius:3px;background:#fff;width:100%}
+.qt .esq span{display:block;margin-bottom:10px;color:#8f8c86}
+.sec{display:flex;justify-content:space-between;align-items:baseline;padding:0 4vw 22px;border-bottom:1px solid #2e2e2c;margin-bottom:3vh}
+.sec h4{font-family:'Instrument Serif',serif;font-weight:400;font-size:34px}
+.dgrid{display:grid;grid-template-columns:1fr 1fr;gap:3vh 2vw;padding:0 4vw 10vh}
+.dgrid figure{cursor:zoom-in}
+.dgrid figure.w{grid-column:span 2}
+.dgrid .fr{background:#fff;border-radius:3px;overflow:hidden;aspect-ratio:16/10;position:relative}
+.dgrid figure.w .fr{aspect-ratio:21/9}
+.dgrid .fr img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:2.2%;transition:transform 1.4s var(--e)}
+.dgrid figure.pho .fr img{object-fit:cover;padding:0}
+.dgrid figure:hover .fr img{transform:scale(1.035)}
+.dgrid figcaption{display:flex;gap:14px;margin-top:10px;color:#a9a59d}
+.dgrid figcaption b{font-weight:400;color:#6f6c66}
+.rv{opacity:0;transform:translateY(40px);transition:opacity 1s,transform 1.1s var(--e)}
+.rv.in{opacity:1;transform:none}
+.next{display:block;margin:0 4vw 6vh;padding:5vh 0;border-top:1px solid #2e2e2c;cursor:pointer;position:relative;overflow:hidden}
+.next .mono{color:#8f8c86}
+.next b{display:flex;align-items:center;gap:20px;font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(40px,6vw,96px);margin-top:12px;transition:gap .6s var(--e),transform .6s var(--e)}
+.next:hover b{gap:44px;transform:translateX(10px)}
+.next .pv{position:absolute;right:0;top:50%;width:26vw;aspect-ratio:16/10;transform:translateY(-50%) scale(.9);opacity:0;transition:all .7s var(--e);border-radius:3px;overflow:hidden}
+.next .pv img{width:100%;height:100%;object-fit:cover}
+.next:hover .pv{opacity:1;transform:translateY(-50%) scale(1)}
+/* PERFIL */
+#perfil .wrap{display:grid;grid-template-columns:3.4fr 6.6fr;gap:5vw;padding:14vh 4vw 10vh}
+#perfil .pic{position:sticky;top:12vh;align-self:start}
+#perfil .pic .f{aspect-ratio:4/5;overflow:hidden;border-radius:3px}
+#perfil .pic img{width:100%;height:100%;object-fit:cover;object-position:62% 40%;transform:scale(1.1);transition:transform 2s var(--e)}
+#perfil.on .pic img{transform:scale(1)}
+#perfil h2{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(22px,1.9vw,30px);line-height:1.25;margin-top:2vh;max-width:640px}
+#perfil .p2{font-size:15px;line-height:1.65;color:#55534e;max-width:640px;margin-top:1.6vh}
+.cv{display:grid;grid-template-columns:1fr 1.3fr 1fr;gap:3vw;margin-top:8vh;padding-top:24px;border-top:1px solid var(--line)}
+.cv h5{margin-bottom:16px;color:var(--mut)}
+.cv .r{display:grid;grid-template-columns:44px 1fr;padding:8px 0;border-bottom:1px solid var(--line);font-size:13.5px;line-height:1.4}
+.cv .r b{font-weight:400;color:var(--mut);font-family:'IBM Plex Mono',monospace;font-size:11px;padding-top:2px}
+.cv .r em{font-family:'Instrument Serif',serif;font-size:17px}
+.cv .r small{display:block;color:var(--mut)}
+.sk{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.sk span{color:var(--mut)}
+/* CONTACTO */
+#contacto .wrap{min-height:100%;display:flex;flex-direction:column;justify-content:center;padding:14vh 4vw 6vh}
+#contacto .ph{border:0}
+#contacto .mail{display:flex;align-items:baseline;gap:22px;flex-wrap:wrap;margin-top:8vh;padding-bottom:4vh;border-bottom:1px solid var(--line)}
+#contacto .mail a{font-family:'Instrument Serif',serif;font-size:clamp(40px,6.4vw,110px);line-height:1;position:relative}
+#contacto .mail a::after{content:'';position:absolute;left:0;right:0;bottom:4px;height:2px;background:#b5472e;transform:scaleX(0);transform-origin:left;transition:transform .7s var(--e)}
+#contacto .mail a:hover::after{transform:scaleX(1)}
+.cp{padding:8px 14px;border:1px solid var(--line);border-radius:20px}
+.cp:hover{background:var(--ink);color:#fff}
+#contacto .rw{display:grid;grid-template-columns:repeat(3,1fr);gap:3vw;padding-top:4vh}
+#contacto .rw div span{display:block;color:var(--mut);margin-bottom:8px}
+#contacto .rw div{font-size:18px}
+#contacto .ft{display:flex;justify-content:space-between;margin-top:12vh;color:var(--mut)}
+/* lightbox */
+#lb{position:fixed;inset:0;background:rgba(18,18,18,.97);z-index:90;display:none;color:#ddd}
+#lb.on{display:block}
+#lb .stage{position:absolute;inset:60px 80px 70px;display:flex;align-items:center;justify-content:center;overflow:hidden;cursor:zoom-in}
+#lb .stage img{max-width:100%;max-height:100%;transition:transform .35s var(--e);transform-origin:center}
+#lb.zm .stage{cursor:grab}
+#lb .cap{position:absolute;left:4vw;bottom:24px}
+#lb .ct{position:absolute;right:4vw;bottom:24px}
+#lb .x{position:absolute;right:4vw;top:18px;font-size:13px}
+#lb .nv{position:absolute;top:50%;width:46px;height:46px;border-radius:50%;border:1px solid #444;transform:translateY(-50%)}
+#lb .nv:hover{background:#fff;color:#111}
+#lb .pv{left:18px}#lb .nx{right:18px}
+.toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,90px);background:var(--ink);color:#fff;padding:10px 18px;border-radius:20px;z-index:95;transition:transform .5s var(--e)}
+.toast.on{transform:translate(-50%,0)}
+@media(max-width:860px){
+ header{padding:0 5vw}header .nm span{display:none}header nav{gap:16px}
+ #inicio .wrap,#perfil .wrap,.ptx,.qt,.cv{grid-template-columns:1fr}
+ .grid{grid-template-columns:1fr}.grid.list .it-c{display:block;padding:18px 0}.grid.list .it-c .im,.grid.list .it-c .y{display:none}.grid.list .it-c .n{display:block;margin-bottom:6px}.grid.list .it-c h3{font-size:28px}
+ .pcols{columns:1}.dgrid{grid-template-columns:1fr}.dgrid figure.w{grid-column:auto}.hero{height:46vh}
+ #perfil .pic{position:relative;top:0}.next .pv{display:none}#contacto .rw{grid-template-columns:1fr}
+ #lb .stage{inset:56px 10px 70px}#lb .nv{display:none}
+}
+</style>
+<script>
+/* respaldo: si una imagen no carga, probar otras carpetas */
+document.addEventListener('error',function(e){var im=e.target;if(!im||im.tagName!=='IMG')return;
+ var f=(im.getAttribute('src')||'').split('/').pop();if(!f)return;
+ var c=['img/'+f,'2_imagenes/img/'+f,'3_imagenes/img/'+f,'4_imagenes/img/'+f,'5_imagenes/img/'+f,'portfolio-web/img/'+f];
+ var t=+(im.dataset.t||0);while(t<c.length&&im.getAttribute('src')===c[t])t++;
+ if(t<c.length){im.dataset.t=t+1;im.src=c[t]}},true);
+</script>
+</head>
+<body>
+<div id="bar"></div>
+<header><button class="nm" data-v="inicio"><b>D. R. González</b> <span>— Arquitecta</span></button>
+<nav><button data-v="proyectos">Proyectos</button><button data-v="perfil">Perfil</button><button data-v="contacto">Contacto</button></nav></header>
+
+<section class="view" id="inicio"><div class="wrap in">
+ <div>
+  <div class="mono mut st">Portfolio — 2026 · Buenos Aires</div>
+  <h1 class="st d1" style="margin-top:3vh">Delfina<br>Rosario<br><em class="it">González</em></h1>
+  <p class="bio st d2">Arquitecta con Campo Menor en Diseño, Universidad Torcuato Di Tella. Investigación aplicada al proceso proyectual y al dibujo como herramienta de análisis.</p>
+  <div class="stats st d3"><div><span class="mono mut">Proyectos</span><b>04</b></div><div><span class="mono mut">Láminas</span><b id="nlam">00</b></div><div><span class="mono mut">Workshops</span><b>05</b></div></div>
+  <div class="st d4" style="display:flex;gap:10px"><button class="btn" data-v="proyectos">Ver proyectos <span>→</span></button><button class="btn ol" data-v="perfil">Perfil</button></div>
+ </div>
+ <div class="show st d2"><div class="fr" id="sfr"></div>
+  <div class="cap" id="scap"><div class="t"><span class="mono mut" id="sn"></span><b id="st"></b><span class="mut sf it" id="ss" style="font-size:16px"></span></div><div class="ar"><button id="sp" aria-label="Anterior">←</button><button id="sx" aria-label="Siguiente">→</button></div></div>
+  <div class="prog" id="sprog"></div></div>
+</div></section>
+
+<section class="view" id="proyectos"><div class="wrap in">
+ <div class="ph"><h2><sup>04</sup>Proyectos</h2><span class="mono mut" id="cnt">4 resultados</span></div>
+ <div class="bar2"><div class="chips" id="chips"></div><div class="tog"><button class="on" data-l="grid">Grilla</button><button data-l="list">Lista</button></div></div>
+ <div class="grid" id="grid"></div>
+</div></section>
+
+<section class="view" id="proyecto"></section>
+
+<section class="view" id="perfil"><div class="wrap in">
+ <div class="pic st"><div class="f"><img src="3_imagenes/img/me_00.jpg" alt="Delfina Rosario González"></div><div class="mono mut" style="margin-top:12px">D. R. González — Arquitecta</div></div>
+ <div>
+  <div class="mono mut st">Perfil · Arquitecta — Campo Menor en Diseño</div>
+  <h2 class="st d1">Me interesa una arquitectura que surge de la lectura atenta del contexto, donde el dibujo, la materialidad y la estructura se integran como herramientas de pensamiento proyectual.</h2>
+  <p class="p2 st d2">Concibo el diseño como un proceso continuo de exploración, reflexión y resolución técnica.</p>
+  <div class="cv st d3">
+   <div><h5 class="mono">Formación</h5>
+    <div class="r"><b>2026</b><span>Universidad Torcuato Di Tella<small>Arquitecta — Campo Menor en Diseño</small></span></div>
+    <div class="r"><b>2021</b><span>Northfield School<small>Bachiller en Comunicación · Cambridge International Certificate of Education</small></span></div></div>
+   <div><h5 class="mono">Workshops</h5>
+    <div class="r"><b>2026</b><span><em>60 columnas, ¿qué sostienen?</em><small>Gustavo Utrabo</small></span></div>
+    <div class="r"><b>2025</b><span><em>Buenos Aires Portrait</em><small>Christ &amp; Gantenbein</small></span></div>
+    <div class="r"><b>2024</b><span><em>Cousins and Friends</em><small>Lütjens Padmanabhan Architekt*innen</small></span></div>
+    <div class="r"><b>2023</b><span><em>Tiza &amp; Carbón</em><small>Pezo von Ellrichshausen</small></span></div>
+    <div class="r"><b>2022</b><span><em>Siete pecados capitales</em><small>Bruther</small></span></div></div>
+   <div><h5 class="mono">Software</h5>
+    <div class="sk">Rhinoceros<span class="mono">Avanzado</span></div><div class="sk">AutoCAD<span class="mono">Avanzado</span></div><div class="sk">InDesign<span class="mono">Avanzado</span></div><div class="sk">Photoshop<span class="mono">Avanzado</span></div><div class="sk">Illustrator<span class="mono">Intermedio</span></div><div class="sk">3ds Max<span class="mono">Intermedio</span></div><div class="sk">V-Ray<span class="mono">Intermedio</span></div><div class="sk">D5<span class="mono">Intermedio</span></div></div>
+  </div>
+ </div>
+</div></section>
+
+<section class="view" id="contacto"><div class="wrap in">
+ <div class="ph st"><h2><sup>—</sup>Contacto</h2><span class="mono mut">Disponible para colaboraciones</span></div>
+ <div class="mail st d1"><a href="mailto:delgonzalez0212@gmail.com">delgonzalez0212@gmail.com</a><button class="cp mono" data-copy="delgonzalez0212@gmail.com">Copiar</button></div>
+ <div class="rw st d2"><div><span class="mono">Teléfono</span>+54 11 5120 6528 <button class="cp mono" data-copy="+54 11 5120 6528" style="margin-left:10px">Copiar</button></div><div><span class="mono">Ciudad</span>Buenos Aires, Argentina</div><div><span class="mono">Formación</span>Universidad Torcuato Di Tella</div></div>
+ <div class="ft mono st d3"><span>© 2026 Delfina Rosario González</span><button data-v="inicio">Volver arriba ↑</button></div>
+</div></section>
+
+<div id="lb"><button class="x mono">Cerrar ✕</button><div class="stage"><img alt=""></div><button class="nv pv">←</button><button class="nv nx">→</button><div class="cap mono"></div><div class="ct mono"></div></div>
+<div class="toast mono" id="toast">Copiado</div>
+
+<script>
+const P=[
+{id:'isla',n:'01',t:'Nuevo Centro Cívico',s:'La posibilidad de una isla',y:'2025',cover:'pam_06',meta:[['Sitio','Centro Cívico de Santa Rosa, La Pampa'],['Docentes','Javier Georgis, Tomás Keny y Clara Fragueiro']],
+ esq:'01_isla',lead:'El proyecto propone reactivar el Centro Cívico de Santa Rosa, recuperando el carácter público con el que fue concebido originalmente.',
+ full:['El curso se centra en el desarrollo de propuestas de intervención sobre el Centro Cívico de Santa Rosa, en la provincia de La Pampa. Este conjunto, proyectado por el arquitecto Clorindo Testa en 1954, constituye una pieza de gran valor dentro del patrimonio arquitectónico moderno argentino. Se analiza su configuración urbana y su significado histórico, con el objetivo de revisitar el proyecto de Testa con una mirada contemporánea, con la intención de actualizar y reformular el conjunto, considerando las condiciones actuales de la ciudad y las lógicas proyectuales del presente.','A partir de su valor urbano y simbólico, se busca reintegrar el conjunto a la vida cotidiana de la ciudad mediante la incorporación de nuevos usos: públicos, culturales y sociales. La estrategia se centra en la Casa de Gobierno, cuya escala predominante dentro del conjunto permite concentrar allí gran parte de los nuevos programas.','Su extensa terraza, de aproximadamente 190 metros de largo, se activa con actividades culturales, deportivas y de ocio, transformándola en un espacio accesible para la comunidad. Esta operación se complementa con un basamento integrado a la topografía que incorpora áreas comerciales, estacionamiento y espacios culturales vinculados al anfiteatro. Se generan aperturas verticales a lo largo de todo el edificio, situándose en sectores donde la preservación patrimonial lo permitía, logrando organizar el espacio interior de trabajo para mejorar las condiciones lumínicas y de ventilación y el espacio en planta disponible para esta nueva azotea cultural.'],
+ sl:[
+  {g:'g1',k:'Ciudad',h:'El conjunto de Testa en la trama urbana',im:[['pam_axo','Axonometría']]},
+  {g:'g3',k:'Implantación',h:'Del edificio al parque',im:[['pam_pb','Planta baja'],['pam_pp1','Planta primer piso'],['pam_pp2','Planta primer piso']]},
+  {g:'gs3',k:'Cortes',h:'Una terraza de 190 m sobre un basamento topográfico',im:[['pam_cl2','Corte longitudinal'],['pam_cl','Corte longitudinal'],['pam_ct','Corte transversal']]},
+  {g:'g64',k:'Plantas',h:'Casa de Gobierno y azotea cultural',im:[['pam_pl','Plantas 1:500'],['pam_plt','Plantas terraza 1:250']]},
+  {g:'g2',k:'Detalle',h:'La terraza, pieza por pieza',im:[['pam_axo_terraza','Axonometría despiezada terraza'],['pam_det','Detalle corte transversal']]}
+ ]},
+{id:'tiempo',n:'02',t:'Expansión Movistar Arena',s:'Detener el tiempo',y:'2025',cover:'mov_00',meta:[['Sitio','Av. Corrientes y Humboldt, Buenos Aires']],
+ esq:'02_tiempo',lead:'La operación de hundir la planta baja refuerza esta intención urbana: se crea un nuevo vacío dentro de la ciudad, un espacio donde el tiempo se detiene.',
+ full:['«Detener el tiempo» propone repensar el papel de la arquitectura frente a la fragmentación urbana propia de los actuales modos de producción del espacio y al fenómeno de aceleración como marca de la experiencia del mundo contemporáneo. En este sentido, el curso sitúa a la disciplina en un campo de discusión que articula su dimensión técnica con su dimensión cultural.','El proyecto surge con el objetivo de aliviar la fuerte congestión que caracteriza a la zona, intensamente transitada por la presencia de la Av. Corrientes, la calle Humboldt, la estación del Ferrocarril San Martín y, en días de eventos, por la actividad del Movistar Arena y el Club Atlanta.','El edificio incorpora salas de grabación de audio, espacios para danza y ámbitos culturales diversos, promoviendo encuentros y nuevas dinámicas de uso vinculadas al ecosistema cultural del lugar. En su etapa inicial, el edificio funciona como estacionamiento, pero está concebido con la capacidad de transformarse progresivamente según las necesidades futuras.'],
+ sl:[
+  {g:'g1',k:'Implantación',h:'Corrientes, Humboldt y el ferrocarril',im:[['mov_impl','Implantación']]},
+  {g:'g64',k:'Subsuelo',h:'Un bosque hundido bajo la ciudad',im:[['mov_sub','Planta subsuelo'],['mov_sk','Croquis']]},
+  {g:'g1',k:'Corte',h:'Estacionamiento hoy, cultura mañana',im:[['mov_ct','Corte transversal']]},
+  {g:'g4',k:'Plantas',h:'Losas preparadas para cambiar de uso',im:[['mov_pl4','Planta cuarto piso'],['mov_pl5','Planta quinto piso'],['mov_pl6','Planta sexto piso'],['mov_plt','Planta terraza']]},
+  {g:'g2',k:'Detalle',h:'Corte transversal detalle',im:[['mov_dsec','Corte transversal detalle'],['mov_daxo','Axonometría despiezada']]},
+  {g:'g2',k:'Imágenes',h:'',ph:1,im:[['mov_01',''],['mov_02','']]},
+  {g:'g4',k:'Secuencia',h:'',ph:1,im:[['bw_1',''],['bw_2',''],['bw_3',''],['bw_4','']]}
+ ]},
+{id:'oficinas',n:'03',t:'Oficinas de Planta Profunda',s:'Edificio corporativo',y:'2024',cover:'pp_02',meta:[['Docentes','Gustavo Grassi y Guillermo']],
+ esq:'03_planta_profunda',lead:'Un gran vacío central estructura la circulación, la iluminación y la relación visual entre niveles.',
+ full:['El proyecto se desarrolla a partir de la necesidad de liberar una planta profunda, organizando el edificio en torno a un gran vacío central que estructura la circulación, la iluminación y la relación visual entre niveles.','La propuesta busca generar un sistema espacial continuo y flexible, donde las áreas de trabajo se disponen en torno a este núcleo abierto que permite que la luz natural y la ventilación penetren en toda la profundidad del volumen.','La envolvente del edificio, compuesta por una trama regular de elementos verticales, actúa como filtro ambiental y compositivo, reforzando la claridad estructural del conjunto y consolidando una imagen arquitectónica precisa, repetitiva y ordenada.'],
+ sl:[
+  {g:'g1',k:'Corte',h:'El vacío atraviesa todo el edificio',im:[['pp_c1','Corte longitudinal']]},
+  {g:'g4',k:'Plantas',h:'Planta libre alrededor del núcleo abierto',im:[['pp_p1','Planta 01'],['pp_p2','Planta 02'],['pp_p3','Planta 03'],['pp_p4','Planta 04']]},
+  {g:'g64',k:'Envolvente',h:'Una trama vertical como filtro',im:[['pp_c2','Corte'],['pp_det','Detalle']]},
+  {g:'g1',k:'Imagen',h:'',ph:1,im:[['pp_03','']]},
+  {g:'g2',k:'Interior',h:'',ph:1,im:[['pp_00',''],['pp_01','']]}
+ ]},
+{id:'brunetta',n:'04',t:'Reinversión Brunetta',s:'Intervoid Tower',y:'2025',cover:'br_ext',meta:[['Programa','Edificio de oficinas'],['Sitio','Buenos Aires']],
+ esq:'04_intervoid',lead:'A través del vacío, Intervoid Tower reinterpreta la Torre Brunetta: una secuencia de llenos y vacíos rompe con la condición hermética de su curtain wall.',
+ full:['A través del vacío, Intervoid Tower reinterpreta la Torre Brunetta, un edificio emblemático por ser uno de los primeros en Buenos Aires en incluir una envolvente continua de curtain wall, la cual establece un límite hermético entre el interior y el exterior. Se entiende al vacío como una herramienta proyectual, de la cual se parte para sustraer sectores de la masa edilicia para crear una secuencia de llenos y vacíos que rompen con la condición hermética tradicional del edificio. Estos espacios permiten incorporar terrazas, con jardines elevados y áreas de expansión que proponen una nueva relación entre los ocupantes de las oficinas y el entorno urbano.','A nivel morfológico, el edificio consiste en una modulación regular en planta, con un módulo de 9,5 × 6 m en los laterales y otro de 7 × 6 m en los paños internos, resultando en una grilla estructural que se traduce en la fachada como un elemento que va alternando los sectores completamente ocupados con otros niveles completamente abiertos hacia el exterior. Esta secuencia construye una identidad volumétrica reconocible, donde la repetición y el desplazamiento de los vacíos proponen una relectura dinámica de la torre.','El proyecto propone oficinas de planta libre organizadas alrededor de un núcleo central que concentra las circulaciones verticales y los servicios. Esta disposición libera el perímetro para maximizar las visuales, el ingreso de luz natural y la flexibilidad de ocupación, permitiendo que cada planta pueda adaptarse a diferentes configuraciones de trabajo.','Desde el punto de vista estructural, la propuesta reemplaza la lógica resistente original por un sistema compuesto por un tabique portante central y una estructura perimetral de columnas y vigas. El núcleo absorbe las cargas gravitatorias del edificio, mientras que la estructura exterior trabaja frente a las acciones horizontales del viento. A su vez, se incorporan nuevas columnas a 45°, que hacen posible la aparición de grandes vacíos sin comprometer el funcionamiento resistente de la torre.'],
+ sl:[
+  {g:'g3',k:'Existente',h:'Torre Brunetta',ph:1,im:[['aer',''],['e3_00','Torre Brunetta'],['e3_02','Croquis']]},
+  {g:'g4',k:'Plantas',h:'Oficinas de planta libre alrededor de un núcleo',im:[['br_p1','Planta 01'],['br_p2','Planta 02'],['br_p4','Planta 04'],['br_p5','Planta 05']]},
+  {g:'g3',k:'Estructura',h:'Núcleo portante y columnas a 45°',im:[['br_est','Elementos estructurales'],['br_mat','Materiales estructurales'],['br_s1','Planta estructural']]},
+  {g:'g64',k:'Imagen',h:'',ph:1,im:[['br_int',''],['br_maq','Maqueta de estudio 1:250']]},
+  {g:'g2',k:'Terrazas',h:'',ph:1,im:[['br_gal',''],['e3_19','Maqueta de estudio']]}
+ ]}
+];
+const X={isla:{tags:['2025','Patrimonio','Urbano'],prog:'Cultural · Público · Comercial',quote:'Su extensa terraza, de aproximadamente 190 metros de largo, se activa con actividades culturales, deportivas y de ocio.'},
+tiempo:{tags:['2025','Urbano','Cultural'],prog:'Cultural · Estacionamiento',quote:'Se crea un nuevo vacío dentro de la ciudad, un espacio donde el tiempo se detiene.'},
+oficinas:{tags:['2024','Oficinas'],prog:'Oficinas',quote:'Un gran vacío central que estructura la circulación, la iluminación y la relación visual entre niveles.'},
+brunetta:{tags:['2025','Patrimonio','Oficinas'],prog:'Oficinas',quote:'Se entiende al vacío como una herramienta proyectual.'},
+paisaje:{tags:['Urbano'],prog:'Paisaje',quote:'Etapa inicial, rehabilitación, convivencia y reutilización.'}};
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const PNG=k=>k.startsWith('br_')&&!['br_ext','br_int','br_gal','br_maq'].includes(k);
+const LOC={"br_gal.jpg": 2, "br_p2.png": 2, "br_s1.png": 2, "e3_02.jpg": 2, "mov_02.jpg": 2, "mov_sub.jpg": 2, "pam_06.jpg": 2, "pam_det.jpg": 2, "pam_pl.jpg": 2, "pp_00.jpg": 2, "pp_01.jpg": 2, "pp_02.jpg": 2, "pp_p2.jpg": 2, "br_ext.jpg": 3, "br_int.jpg": 3, "br_maq.jpg": 3, "br_mat.png": 3, "bw_1.jpg": 3, "me_00.jpg": 3, "mov_00.jpg": 3, "mov_pl6.jpg": 3, "pam_axo_terraza.jpg": 3, "pam_ct.jpg": 3, "pam_plt.jpg": 3, "pam_pp2.jpg": 3, "pp_c2.jpg": 3, "pp_det.jpg": 3, "pp_p1.jpg": 3, "br_est.png": 4, "br_p4.png": 4, "br_p5.png": 4, "bw_3.jpg": 4, "e3_00.jpg": 4, "mov_01.jpg": 4, "mov_impl.jpg": 4, "pam_axo.jpg": 4, "pam_cl.jpg": 4, "pam_cl2.jpg": 4, "pam_pb.jpg": 4, "pp_03.jpg": 4, "pp_p4.jpg": 4, "aer.jpg": 5, "br_p1.png": 5, "bw_2.jpg": 5, "bw_4.jpg": 5, "e3_19.jpg": 5, "mov_ct.jpg": 5, "mov_daxo.jpg": 5, "mov_dsec.jpg": 5, "mov_pl4.jpg": 5, "mov_pl5.jpg": 5, "mov_plt.jpg": 5, "mov_sk.jpg": 5, "pam_pp1.jpg": 5, "pp_c1.jpg": 5, "pp_p3.jpg": 5};
+const IMG=k=>{const f=k+(PNG(k)?'.png':'.jpg');return LOC[f]?LOC[f]+'_imagenes/img/'+f:'img/'+f};
+P.forEach(p=>{Object.assign(p,X[p.id]);p.items=[];p.sl.forEach(s=>s.im.forEach(m=>p.items.push({k:m[0],c:m[1]||s.k,ph:!!s.ph,w:s.g==='g1'||s.g==='gs3'})))});
+$('#nlam').textContent=String(P.reduce((a,p)=>a+p.items.length,0)).padStart(2,'0');
+/* router */
+let cur='inicio';
+function show(v,pid){
+ $$('.view').forEach(x=>x.classList.toggle('on',x.id===v));
+ $$('header nav button').forEach(b=>b.classList.toggle('on',b.dataset.v===v||(v==='proyecto'&&b.dataset.v==='proyectos')));
+ document.body.classList.toggle('dark',v==='proyecto');
+ const el=$('#'+v);el.scrollTop=0;cur=v;bar();
+ try{history.replaceState(null,'','#'+(pid||v))}catch(e){}
+}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-v]');if(b)show(b.dataset.v)});
+/* progress bar per view */
+function bar(){const el=$('#'+cur);const m=el.scrollHeight-el.clientHeight;$('#bar').style.width=(m>0?el.scrollTop/m*100:0)+'%'}
+$$('.view').forEach(v=>v.addEventListener('scroll',()=>{if(v.id===cur){bar();if(cur==='proyecto')para()}},{passive:true}));
+/* slideshow */
+const S=P.map((p,i)=>({p,i,src:IMG(p.cover),c:!!p.coverC}));
+const sfr=$('#sfr'),sprog=$('#sprog');let si=0,tm;
+S.forEach((s,i)=>{const im=document.createElement('img');im.src=s.src;if(s.c)im.className='c';sfr.appendChild(im);const t=document.createElement('i');t.innerHTML='<b></b>';t.onclick=()=>sgo(i);sprog.appendChild(t)});
+function sgo(i){si=(i+S.length)%S.length;const ims=sfr.querySelectorAll('img');ims.forEach((m,j)=>m.classList.toggle('on',j===si));
+ const ts=sprog.querySelectorAll('i');ts.forEach((t,j)=>{t.className=j<si?'done':'';});void sprog.offsetWidth;ts[si].className='run';
+ const cap=$('#scap');cap.classList.add('sw');setTimeout(()=>{$('#sn').textContent=S[si].p.n;$('#st').textContent=S[si].p.t;$('#ss').textContent=S[si].p.s;cap.classList.remove('sw')},300);
+ clearTimeout(tm);tm=setTimeout(()=>sgo(si+1),5000)}
+$('#sp').onclick=()=>sgo(si-1);$('#sx').onclick=()=>sgo(si+1);sfr.onclick=()=>openP(si);sgo(0);
+/* grid */
+const tags=['Todos','2025','2024','Patrimonio','Oficinas','Urbano','Cultural'];
+$('#chips').innerHTML=tags.map((t,i)=>`<button class="${i?'':'on'}">${t}</button>`).join('');
+$('#grid').innerHTML=P.map((p,i)=>`<div class="it-c" data-i="${i}" data-t="${p.tags.join(' ')}"><div class="im"><img ${p.coverC?'class="c"':''} src="${IMG(p.cover)}" alt="" loading="lazy"><img class="h2" src="${IMG(p.items[0].k)}" alt="" loading="lazy"></div><div class="mt"><span class="mono mut n">${p.n} — ${p.tags.filter(t=>!/^\d/.test(t)).join(' · ')}</span><span class="mono mut y">${p.y}</span></div><div class="tx"><h3>${p.t}</h3><div class="sb">${p.s}</div></div></div>`).join('');
+$$('.it-c').forEach(c=>c.onclick=()=>openP(+c.dataset.i));
+$$('#chips button').forEach(b=>b.onclick=()=>{$$('#chips button').forEach(x=>x.classList.toggle('on',x===b));let n=0;
+ $$('.it-c').forEach(c=>{const ok=b.textContent==='Todos'||c.dataset.t.split(' ').includes(b.textContent);c.classList.toggle('hide',!ok);if(ok){n++;c.animate([{opacity:0,transform:'translateY(20px)'},{opacity:1,transform:'none'}],{duration:600,delay:n*70,easing:'cubic-bezier(.2,.7,.2,1)',fill:'backwards'})}});
+ $('#cnt').textContent=n+(n===1?' resultado':' resultados')});
+$$('.tog button').forEach(b=>b.onclick=()=>{$$('.tog button').forEach(x=>x.classList.toggle('on',x===b));$('#grid').classList.toggle('list',b.dataset.l==='list')});
+/* project page */
+let io,LB=[];
+function openP(i){const p=P[i],nx=P[(i+1)%P.length];
+ const meta=[['Año',p.y]].concat(p.meta).concat([['Programa',p.prog]]).filter(m=>m[1]);
+ LB=[{s:IMG(p.cover),c:p.t}];
+ let h=`<div class="hd"><div class="mono kk st">${p.n} — ${p.tags.filter(t=>!/^\d/.test(t)).join(' · ')}</div><h1 class="st d1">${p.t}</h1><div class="sb st d2">${p.s}</div></div>
+ <div class="hero st d3" data-lb="0"><img ${p.coverC?'class="c"':''} src="${IMG(p.cover)}" alt=""></div>
+ <div class="ptx"><div class="pm rv">${meta.map(m=>`<div><span class="mono">${m[0]}</span>${m[1]}</div>`).join('')}</div>
+ <div class="pcols rv">${(p.full.length?p.full:[p.lead]).map(t=>`<p>${t}</p>`).join('')}</div></div>
+ <div class="qt"><span class="mono" style="color:#8f8c86">Idea</span><blockquote class="rv">${p.quote}</blockquote><div class="esq rv" data-lb="1"><span class="mono">Esquema</span><img src="esq/${p.esq}.svg" alt=""></div></div>`;
+ LB.push({s:'esq/'+p.esq+'.svg',c:'Esquema'});
+ h+=`<div class="sec"><h4>Láminas</h4><span class="mono" style="color:#8f8c86">${String(p.items.length).padStart(2,'0')} documentos</span></div><div class="dgrid">`;
+ p.items.forEach((m,j)=>{LB.push({s:IMG(m.k),c:m.c});h+=`<figure class="rv ${m.w?'w':''} ${m.ph?'pho':''}" data-lb="${LB.length-1}"><div class="fr"><img loading="lazy" src="${IMG(m.k)}" alt="${m.c}"></div><figcaption class="mono"><b>${String(j+1).padStart(2,'0')}</b>${m.c}</figcaption></figure>`});
+ h+=`</div><div class="next" data-n="${(i+1)%P.length}"><span class="mono">Siguiente proyecto — ${nx.n}</span><b>${nx.t} <span>→</span></b><div class="pv"><img src="${IMG(nx.cover)}" alt="" ${nx.coverC?'style="object-fit:contain;background:#fff"':''}></div></div>`;
+ const v=$('#proyecto');v.innerHTML=h;
+ v.querySelector('.next').onclick=()=>{v.style.opacity=0;setTimeout(()=>{openP(+v.querySelector('.next').dataset.n);v.style.opacity=''},400)};
+ v.querySelectorAll('[data-lb]').forEach(f=>f.onclick=()=>lbOpen(+f.dataset.lb));
+ v.querySelectorAll('.dgrid figure:not(.pho) img').forEach(im=>{const f=()=>{const r=im.naturalWidth/im.naturalHeight;if(r)im.parentElement.style.aspectRatio=Math.max(.7,Math.min(im.closest('figure').classList.contains('w')?3.2:1.9,r))};im.complete?f():im.onload=f});
+ if(io)io.disconnect();io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{root:v,threshold:.08});
+ v.querySelectorAll('.rv').forEach(x=>io.observe(x));
+ show('proyecto',p.id);}
+function para(){const im=$('#proyecto .hero img:not(.c)');if(!im)return;const r=im.parentElement.getBoundingClientRect();im.style.transform=`translateY(${Math.max(-16,Math.min(0,r.top/innerHeight*12-12))}%)`}
+/* lightbox */
+const lb=$('#lb'),li=lb.querySelector('img');let li_i=0,zm=1,tx=0,ty=0,dr=0,sx,sy,mv=0;
+function lbSet(){li.src=LB[li_i].s;lb.querySelector('.cap').textContent=LB[li_i].c||'';lb.querySelector('.ct').textContent=(li_i+1)+' / '+LB.length;zm=1;tx=ty=0;ap();lb.classList.remove('zm')}
+function ap(){li.style.transform=`translate(${tx}px,${ty}px) scale(${zm})`}
+function lbOpen(i){li_i=i;lbSet();lb.classList.add('on')}
+function lbClose(){lb.classList.remove('on')}
+lb.querySelector('.x').onclick=lbClose;lb.querySelector('.pv').onclick=()=>{li_i=(li_i-1+LB.length)%LB.length;lbSet()};lb.querySelector('.nx').onclick=()=>{li_i=(li_i+1)%LB.length;lbSet()};
+const stg=lb.querySelector('.stage');
+stg.addEventListener('click',e=>{if(mv){mv=0;return}if(zm===1){zm=2.4;const r=li.getBoundingClientRect();tx=(r.left+r.width/2-e.clientX)*1.4;ty=(r.top+r.height/2-e.clientY)*1.4;lb.classList.add('zm')}else{zm=1;tx=ty=0;lb.classList.remove('zm')}ap()});
+stg.addEventListener('wheel',e=>{e.preventDefault();zm=Math.max(1,Math.min(5,zm*(e.deltaY<0?1.15:.87)));if(zm===1){tx=ty=0}lb.classList.toggle('zm',zm>1);ap()},{passive:false});
+stg.addEventListener('mousedown',e=>{if(zm===1)return;dr=1;sx=e.clientX;sy=e.clientY;e.preventDefault()});
+addEventListener('mousemove',e=>{if(!dr)return;mv=1;tx+=e.clientX-sx;ty+=e.clientY-sy;sx=e.clientX;sy=e.clientY;li.style.transition='none';ap()});
+addEventListener('mouseup',()=>{if(dr){dr=0;li.style.transition=''}});
+addEventListener('keydown',e=>{if(!lb.classList.contains('on'))return;if(e.key==='Escape')lbClose();if(e.key==='ArrowRight')lb.querySelector('.nx').click();if(e.key==='ArrowLeft')lb.querySelector('.pv').click()});
+/* copy */
+$$('[data-copy]').forEach(b=>b.onclick=async()=>{try{await navigator.clipboard.writeText(b.dataset.copy);const t=$('#toast');t.classList.add('on');setTimeout(()=>t.classList.remove('on'),1500)}catch(e){}});
+/* init */
+try{history.replaceState(null,'',location.pathname)}catch(e){}
+show('inicio');
+</script>
+</body>
+</html>
